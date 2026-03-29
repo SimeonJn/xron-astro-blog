@@ -38,6 +38,11 @@ function getClockIcon(dateString) {
     const clockIcons = ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'];
     return clockIcons[hours];
 }
+
+function formatDateDisplay(dateString) {
+    if (!dateString) return '';
+    return String(dateString).split(' ')[0].replace(/-/g, '/');
+}
 ---
 
 <!doctype html>
@@ -95,7 +100,7 @@ function getClockIcon(dateString) {
 			.polaroid-item {
 				position: relative;
 				width: 310px;
-				min-height: 380px; /* Use min-height so it can stretch if content is tall */
+				height: 380px; /* Fixed height so description won't stretch it */
 				/* Scattering rotations */
 				transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0s;
 				cursor: pointer;
@@ -147,7 +152,7 @@ function getClockIcon(dateString) {
 				position: relative;
 				z-index: 2;
 				background: #ffffff;
-				padding: 15px 15px 60px 15px;
+				padding: 15px 15px 25px 15px; /* Reduced from 60px to give caption more inner space */
 				box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 				border: 1px solid var(--line-color);
 				opacity: 0;
@@ -232,7 +237,7 @@ function getClockIcon(dateString) {
 					margin-bottom: 2em;
 				}
 				.polaroid-content {
-					padding-bottom: 50px;
+					padding-bottom: 25px;
 				}
 				.polaroid-item:nth-child(odd) { transform: rotate(1.5deg) !important; }
 				.polaroid-item:nth-child(even) { transform: rotate(-1.5deg) !important; }
@@ -352,10 +357,10 @@ function getClockIcon(dateString) {
 							</div>
 							<div class="polaroid-caption">
 								{image.alt && <div class="caption-title">{image.alt}</div>}
-								{image.description && <div class="caption-desc" style="font-size: 0.85em; color: #888; margin-top: 0.3em; line-height: 1.2;">{image.description}</div>}
+								{image.description && <div class="caption-desc" style="font-size: 0.8em; color: #888; margin-top: 0.5em; line-height: 1.2; text-align: left; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis;">{image.description}</div>}
 								{(image.date || image.location) && (
-									<div class="caption-meta" style="font-size: 0.75em; color: #aaa; margin-top: 0.8em; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; border-top: 1px solid #f0f0f0; padding-top: 6px;">
-										{image.date && <span class="date">{getClockIcon(image.date)} {image.date}</span>}
+									<div class="caption-meta" style="font-size: 0.75em; color: #aaa; margin-top: 0.6em; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 6px;">
+										{image.date && <span class="date">{getClockIcon(image.date)} {formatDateDisplay(image.date)}</span>}
 										{image.location && <span class="location">📍 {image.location}</span>}
 									</div>
 								)}
