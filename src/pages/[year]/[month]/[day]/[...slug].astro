@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+const posts = await getCollection("blog");
+return posts.map((post) => {
+const date = post.data.pubDate;
+if (!date) return null;
+
+const year = date.getUTCFullYear().toString();
+const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+const day = date.getUTCDate().toString().padStart(2, "0");
+
+return {
+params: { year, month, day, slug: post.id },
+};
+}).filter(Boolean);
+}
+
+const { slug } = Astro.params;
+return Astro.redirect(`/blog/${slug}/`);
+---

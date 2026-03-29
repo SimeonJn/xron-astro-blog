@@ -14,73 +14,85 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
-			main {
-				width: 960px;
+			.archive-heading {
+				font-size: 2.5em;
+				margin-bottom: 1.5em;
+				border-bottom: 2px solid var(--text-main);
+				padding-bottom: 0.5em;
+				display: inline-block;
 			}
+			
 			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 			}
+			
 			ul li {
-				width: calc(50% - 1rem);
+				margin-bottom: 0;
+				border-bottom: 1px dashed var(--line-color-dark);
 			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
+			
 			ul li a {
-				display: block;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1.5em 0;
+				text-decoration: none;
+				border-bottom: none;
+				color: var(--text-main);
+				position: relative;
+				transition: transform 0.3s ease, padding-left 0.3s ease;
 			}
+
+			ul li a::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 6px;
+				height: 6px;
+				background-color: var(--text-main);
+				border-radius: 50%;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			ul li a:hover {
+				padding-left: 20px;
+			}
+
+			ul li a:hover::before {
+				opacity: 1;
+			}
+
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
+				font-size: 1.5em;
+				font-weight: 700;
+				transition: color 0.3s ease;
 			}
+			
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--text-muted);
+				font-size: 0.9em;
+				white-space: nowrap;
+				min-width: 120px;
+				text-align: right;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
+			
 			@media (max-width: 720px) {
-				ul {
+				ul li a {
+					flex-direction: column;
+					align-items: flex-start;
 					gap: 0.5em;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+				.date {
+					text-align: left;
 				}
 			}
 		</style>
@@ -89,16 +101,16 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section>
+				<h1 class="archive-heading animate-up">Archive</h1>
 				<ul>
 					{
-						posts.map((post) => (
-							<li>
+						posts.map((post, index) => (
+							<li class="scroll-animate" style={`transition-delay: ${0.1 + ((index % 5) * 0.05)}s`}>
 								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
+									<div class="title">{post.data.title}</div>
+									<div class="date">
 										<FormattedDate date={post.data.pubDate} />
-									</p>
+									</div>
 								</a>
 							</li>
 						))

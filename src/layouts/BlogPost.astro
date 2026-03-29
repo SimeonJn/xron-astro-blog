@@ -1,13 +1,25 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+	headings?: MarkdownHeading[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, headings = [], references = [] } = Astro.props;
+
+// 解析 Markdown 格式的参考文献链接 (例如: '[text](url)')
+const parsedReferences = references.map((ref) => {
+	const match = ref.match(/^\[(.*?)\]\((.*?)\)$/);
+	if (match) {
+		return { text: match[1], url: match[2] };
+	}
+	return { text: ref, url: ref };
+});
 ---
 
 <html lang="en">
@@ -21,62 +33,251 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.hero-image {
 				width: 100%;
+				margin-bottom: 2em;
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				border-radius: 0;
+				max-width: 100%;
 			}
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
-				color: rgb(var(--gray-dark));
+				color: var(--text-main);
 			}
 			.title {
-				margin-bottom: 1em;
+				margin-bottom: 2em;
 				padding: 1em 0;
-				text-align: center;
+				text-align: left;
 				line-height: 1;
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				font-size: 2.5em;
 			}
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				margin-bottom: 1em;
+				color: var(--text-muted);
+				font-size: 0.9em;
+				display: flex;
+				gap: 1em;
+				align-items: center;
+			}
+			.date::before {
+				content: '';
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				background-color: var(--text-main);
+				border-radius: 50%;
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			.content-divider {
+				width: 100%;
+				height: 1px;
+				background: repeating-linear-gradient(to right, var(--text-muted) 0, var(--text-muted) 1px, transparent 1px, transparent 4px);
+				margin: 2em 0;
+			}
+
+			/* References Section */
+			.references-container {
+				margin-top: 3em;
+				padding-top: 2em;
+				border-top: 1px solid var(--text-muted);
+			}
+			.references-title {
+				font-size: 1.2em;
+				margin-bottom: 1em;
+				font-weight: bold;
+			}
+			.references-list {
+				padding-left: 1.5em;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5em;
+			}
+			.references-item {
+				color: var(--text-muted);
+			}
+			.references-item a {
+				color: var(--text-main);
+				text-decoration: underline;
+				text-underline-offset: 4px;
+				text-decoration-color: transparent;
+				transition: text-decoration-color 0.2s ease;
+			}
+			.references-item a:hover {
+				text-decoration-color: var(--text-main);
+			}
+
+			/* TOC Layout */
+			.layout-container {
+				display: flex;
+				justify-content: center;
+				position: relative;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.toc-container {
+				display: none;
+			}
+
+			@media (min-width: 1024px) {
+				.layout-container {
+					gap: 2em;
+					flex-direction: row;
+				}
+				.prose {
+					margin: 0;
+				}
+				.toc-container {
+					display: block;
+					width: 250px;
+					flex-shrink: 0;
+					position: sticky;
+					top: 100px;
+					height: max-content;
+					max-height: calc(100vh - 120px);
+					overflow-y: auto;
+				}
+				.toc-container::-webkit-scrollbar {
+					display: none;
+				}
+				.toc-content {
+					border-left: 1px dotted var(--text-muted);
+					padding-left: 1.5em;
+					position: relative;
+				}
+				.toc-title {
+					font-size: 0.85em;
+					font-weight: 600;
+					letter-spacing: 0.1em;
+					margin-bottom: 1.5em;
+					color: var(--text-main);
+					text-transform: uppercase;
+					display: flex;
+					align-items: center;
+					gap: 0.5em;
+				}
+				.toc-title::before {
+					content: '';
+					display: inline-block;
+					width: 6px;
+					height: 6px;
+					background-color: var(--text-main);
+					border-radius: 50%;
+				}
+				.toc-list {
+					list-style: none;
+					padding: 0;
+					margin: 0;
+					display: flex;
+					flex-direction: column;
+					gap: 0.8em;
+				}
+				.toc-item a {
+					color: var(--text-muted);
+					text-decoration: none;
+					display: block;
+					position: relative;
+					transition: color 0.3s ease, transform 0.3s ease;
+					line-height: 1.4;
+					font-size: 0.9em;
+				}
+				.toc-item a::before {
+					content: '';
+					position: absolute;
+					left: -1em;
+					top: 50%;
+					transform: translateY(-50%) scale(0);
+					width: 4px;
+					height: 4px;
+					border-radius: 50%;
+					background-color: var(--text-main);
+					transition: transform 0.3s ease, background-color 0.3s ease;
+				}
+				.toc-item a:hover {
+					color: var(--text-main);
+					transform: translateX(4px);
+				}
+				.toc-item a:hover::before {
+					transform: translateY(-50%) scale(1);
+				}
+				.toc-depth-3, .toc-depth-4, .toc-depth-5, .toc-depth-6 {
+					padding-left: 1em;
+					font-size: 0.85em;
+				}
 			}
 		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
+		<main class="animate-up" style="animation-delay: 0.1s;">
 			<article>
 				<div class="hero-image">
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+				<div class="layout-container">
+					<div class="prose">
+						<div class="title">
+							<div class="date">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											(Updated: <FormattedDate date={updatedDate} />)
+										</div>
+									)
+								}
+							</div>
+							<h1>{title}</h1>
+							<div class="content-divider"></div>
 						</div>
-						<h1>{title}</h1>
-						<hr />
+						<div class="article-content">
+							<slot />
+						</div>
+
+						{parsedReferences && parsedReferences.length > 0 && (
+							<div class="references-container">
+								<div class="references-title"># 参考文档</div>
+								<ol class="references-list">
+									{parsedReferences.map((ref) => (
+										<li class="references-item">
+											{ref.url !== ref.text ? (
+												<a href={ref.url} target="_blank" rel="noopener noreferrer">
+													{ref.text}
+												</a>
+											) : (
+												<span>{ref.text}</span>
+											)}
+										</li>
+									))}
+								</ol>
+							</div>
+						)}
 					</div>
-					<slot />
+					{headings && headings.length > 0 && (
+						<aside class="toc-container">
+							<div class="toc-content">
+								<div class="toc-title">目录</div>
+								<ul class="toc-list">
+									{headings.map((h) => (
+										<li class={`toc-item toc-depth-${h.depth}`}>
+											<a href={`#${h.slug}`}>{h.text}</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						</aside>
+					)}
 				</div>
 			</article>
 		</main>

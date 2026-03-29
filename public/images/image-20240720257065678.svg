@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 2024072025706.svg 页-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="10.2244in" height="1.88133in"
+		viewBox="0 0 736.155 135.455" xml:space="preserve" color-interpolation-filters="sRGB" class="st14">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false"/>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#5b9bd5;stroke:#5b9bd5;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st2 {fill:#73ae42;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st3 {fill:#73ae42;stroke:#73ae42;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st4 {fill:#ffffff;font-family:Calibri;font-size:1.00001em;font-weight:bold}
+		.st5 {fill:#ffffff;stroke:#73ae42;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st6 {marker-end:url(#mrkr4-40);stroke:#5592c9;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st7 {fill:#5592c9;fill-opacity:1;stroke:#5592c9;stroke-opacity:1;stroke-width:0.16556291390728}
+		.st8 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st9 {fill:#41719d;font-family:宋体;font-size:0.666664em}
+		.st10 {font-family:Calibri;font-size:1em}
+		.st11 {font-size:1em}
+		.st12 {font-family:Cambria Math;font-size:1em}
+		.st13 {fill:#ffffff;stroke:none;stroke-linecap:butt}
+		.st14 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend4">
+			<path d="M 2 1 L 0 0 L 2 -1 L 2 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr4-40" class="st7" v:arrowType="4" v:arrowSize="2" v:setback="12.08" refX="-12.08" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend4" transform="scale(-6.04,-6.04) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="连接线" v:index="0"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" transform="translate(0.25,-50.1739)">
+			<title>初始状态</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<ellipse cx="17.0079" cy="118.448" rx="17.0079" ry="17.0079" class="st1"/>
+		</g>
+		<g id="group2-3" transform="translate(88.5492,-44.7799)" v:mID="2" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<title>状态</title>
+			<g id="shape2-4" v:mID="2" v:groupContext="groupContent">
+				<rect x="0" y="90.6518" width="70.8661" height="44.8037" rx="8.50394" ry="8.50394" class="st2"/>
+			</g>
+			<g id="shape3-6" v:mID="3" v:groupContext="shape" transform="translate(0,-22.4)">
+				<title>工作表.3</title>
+				<desc>STANDBY</desc>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Title)"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="35.4331" cy="124.254" width="70.87" height="22.4037"/>
+				<path d="M8.5 135.46 L62.36 135.46 A8.50394 8.50394 -180 0 0 70.87 126.95 L70.87 121.56 A8.50394 8.50394 -180 0 0
+							 62.36 113.05 L8.5 113.05 A8.50394 8.50394 -180 0 0 -0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st3"/>
+				<text x="11.78" y="127.85" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>STANDBY</text>			</g>
+			<g id="shape4-9" v:mID="4" v:groupContext="shape">
+				<title>工作表.4</title>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Body)"/>
+				</v:userDefs>
+				<path d="M8.5 135.46 L62.36 135.46 A8.50394 8.50394 -180 0 0 70.87 126.95 L70.87 121.56 A8.50394 8.50394 -180 0 0
+							 62.36 113.06 L8.5 113.06 A8.50394 8.50394 -180 0 0 -0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st5"/>
+			</g>
+		</g>
+		<g id="group5-11" transform="translate(249.829,-45.3287)" v:mID="5" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<title>状态.5</title>
+			<g id="shape5-12" v:mID="5" v:groupContext="groupContent">
+				<rect x="0" y="90.6518" width="70.8661" height="44.8037" rx="8.50394" ry="8.50394" class="st2"/>
+			</g>
+			<g id="shape6-14" v:mID="6" v:groupContext="shape" transform="translate(0,-22.4)">
+				<title>工作表.6</title>
+				<desc>RELEASED</desc>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Title)"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="35.4331" cy="124.254" width="70.87" height="22.4037"/>
+				<path d="M8.5 135.46 L62.36 135.46 A8.50394 8.50394 -180 0 0 70.87 126.95 L70.87 121.56 A8.50394 8.50394 -180 0 0
+							 62.36 113.05 L8.5 113.05 A8.50394 8.50394 -180 0 0 -0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st3"/>
+				<text x="10.48" y="127.85" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>RELEASED</text>			</g>
+			<g id="shape7-17" v:mID="7" v:groupContext="shape">
+				<title>工作表.7</title>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Body)"/>
+				</v:userDefs>
+				<path d="M8.5 135.46 L62.36 135.46 A8.50394 8.50394 -180 0 0 70.87 126.95 L70.87 121.56 A8.50394 8.50394 -180 0 0
+							 62.36 113.06 L8.5 113.06 A8.50394 8.50394 -180 0 0 -0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st5"/>
+			</g>
+		</g>
+		<g id="group8-19" transform="translate(438.278,-45.325)" v:mID="8" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<title>状态.8</title>
+			<g id="shape8-20" v:mID="8" v:groupContext="groupContent">
+				<rect x="0" y="90.6518" width="70.8661" height="44.8037" rx="8.50394" ry="8.50394" class="st2"/>
+			</g>
+			<g id="shape9-22" v:mID="9" v:groupContext="shape" transform="translate(0,-22.4)">
+				<title>工作表.9</title>
+				<desc>PRESSING</desc>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Title)"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="35.4331" cy="124.254" width="70.87" height="22.4037"/>
+				<path d="M8.5 135.46 L62.36 135.46 A8.50394 8.50394 -180 0 0 70.87 126.95 L70.87 121.56 A8.50394 8.50394 -180 0 0
+							 62.36 113.05 L8.5 113.05 A8.50394 8.50394 -180 0 0 -0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st3"/>
+				<text x="10.89" y="127.85" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>PRESSING</text>			</g>
+			<g id="shape10-25" v:mID="10" v:groupContext="shape">
+				<title>工作表.10</title>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Body)"/>
+				</v:userDefs>
+				<path d="M8.5 135.46 L62.36 135.46 A8.50394 8.50394 -180 0 0 70.87 126.95 L70.87 121.56 A8.50394 8.50394 -180 0 0
+							 62.36 113.06 L8.5 113.06 A8.50394 8.50394 -180 0 0 -0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st5"/>
+			</g>
+		</g>
+		<g id="group11-27" transform="translate(644.24,-45.3268)" v:mID="11" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<title>状态.11</title>
+			<g id="shape11-28" v:mID="11" v:groupContext="groupContent">
+				<rect x="0" y="90.6518" width="91.6645" height="44.8037" rx="8.50394" ry="8.50394" class="st2"/>
+			</g>
+			<g id="shape12-30" v:mID="12" v:groupContext="shape" transform="translate(0,-22.4)">
+				<title>工作表.12</title>
+				<desc>KNOB ACTIVATE</desc>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Title)"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="45.8322" cy="124.254" width="91.67" height="22.4037"/>
+				<path d="M8.5 135.46 L83.16 135.46 A8.50394 8.50394 -180 0 0 91.66 126.95 L91.66 121.56 A8.50394 8.50394 -180 0 0
+							 83.16 113.05 L8.5 113.05 A8.50394 8.50394 -180 0 0 0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st3"/>
+				<text x="5.36" y="127.85" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>KNOB ACTIVATE</text>			</g>
+			<g id="shape13-33" v:mID="13" v:groupContext="shape">
+				<title>工作表.13</title>
+				<v:userDefs>
+					<v:ud v:nameU="UmlRole" v:prompt="" v:val="VT4(Body)"/>
+				</v:userDefs>
+				<path d="M8.5 135.46 L83.16 135.46 A8.50394 8.50394 -180 0 0 91.66 126.95 L91.66 121.56 A8.50394 8.50394 -180 0 0
+							 83.16 113.06 L8.5 113.06 A8.50394 8.50394 -180 0 0 0 121.56 L0 126.95 A8.50394 8.50394 -180 0 0 8.5
+							 135.46 Z" class="st5"/>
+			</g>
+		</g>
+		<g id="shape14-35" v:mID="14" v:groupContext="shape" v:layerMember="0" transform="translate(34.2657,-60.0952)">
+			<title>动态连接线</title>
+			<path d="M0 128.37 L48.24 128.37" class="st6"/>
+		</g>
+		<g id="shape15-41" v:mID="15" v:groupContext="shape" v:layerMember="0" transform="translate(159.415,-60.3695)">
+			<title>动态连接线.15</title>
+			<desc>识别到手部</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="45.207" cy="128.369" width="49.82" height="18.6536"/>
+			<path d="M0 128.64 L84.37 128.13" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="25.2072" y="123.044" width="39.9998" height="10.6501" class="st8"/>
+			<text x="25.21" y="131.03" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>识别到手部</text>		</g>
+		<g id="shape17-48" v:mID="17" v:groupContext="shape" v:layerMember="0" transform="translate(320.695,-74.8153)">
+			<title>动态连接线.17</title>
+			<desc>双指指尖距离∈ [x,y]</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="58.7915" cy="142.542" width="81.61" height="18.6536"/>
+			<path d="M0 142.54 L111.54 142.54" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="22.8931" y="137.217" width="71.797" height="10.6501" class="st8"/>
+			<text x="22.89" y="145.2" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>双指指尖距离∈<tspan
+						class="st10"> </tspan><tspan class="st10">[x,y]</tspan></text>		</g>
+		<g id="shape19-57" v:mID="19" v:groupContext="shape" v:layerMember="0" transform="translate(509.145,-60.6411)">
+			<title>动态连接线.19</title>
+			<desc>按压时间超时 且 中心点的σ值小于x</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="67.5477" cy="128.369" width="77.28" height="29.3037"/>
+			<path d="M0 128.37 L129.06 128.37" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="33.8156" y="117.719" width="67.4646" height="21.3" class="st8"/>
+			<text x="38.64" y="125.71" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>按压时间超时<tspan
+						class="st10"> </tspan>且<v:newlineChar/><tspan x="33.82" dy="1.331em" class="st11">中心点的</tspan>σ值小于<tspan
+						class="st10">x</tspan></text>		</g>
+		<g id="shape29-67" v:mID="29" v:groupContext="shape" v:layerMember="0" transform="translate(690.072,-83.0448)">
+			<title>动态连接线.29</title>
+			<path d="M0 128.37 L0 92.37 L-404.81 92.37 L-404.81 122.33" class="st6"/>
+		</g>
+		<g id="shape32-72" v:mID="32" v:groupContext="shape" v:layerMember="0" transform="translate(473.711,-83.0439)">
+			<title>动态连接线.32</title>
+			<desc>双指指尖距离∉ [x,y]</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="-94.2227" cy="92.3707" width="78.74" height="18.6536"/>
+			<path d="M0 128.37 L0 92.37 L-188.45 92.37 L-188.45 122.33" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="-128.682" y="87.046" width="68.9181" height="10.6501" class="st8"/>
+			<text x="-128.68" y="95.03" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>双指指尖距离<tspan
+						class="st12">∉</tspan><tspan class="st10"> </tspan><tspan class="st10">[x,y]</tspan></text>		</g>
+		<g id="shape34-82" v:mID="34" v:groupContext="shape" v:layerMember="0" transform="translate(690.072,-52.4125)">
+			<title>动态连接线.34</title>
+			<desc>中心点的σ值大于x</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="-108.179" cy="178.541" width="77.28" height="18.6536"/>
+			<path d="M0 142.54 L0 178.54 L-216.36 178.54 L-216.36 148.58" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="-141.912" y="173.216" width="67.4646" height="10.6501" class="st8"/>
+			<text x="-141.91" y="181.2" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>中心点的σ值大于<tspan
+						class="st10">x</tspan></text>		</g>
+		<g id="shape37-90" v:mID="37" v:groupContext="shape" v:layerMember="0" transform="translate(285.262,-52.1409)">
+			<title>动态连接线.37</title>
+			<desc>没有识别到手部, 超时</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="-80.3657" cy="178.268" width="85.62" height="18.6536"/>
+			<path d="M0 142.27 L0 178.27 L-161.28 178.27 L-161.28 148.86" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="-118.268" y="172.943" width="75.8046" height="10.6501" class="st13"/>
+			<text x="-118.27" y="180.93" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>没有识别到手部<tspan
+						class="st10">, </tspan>超时</text>		</g>
+	</g>
+</svg>

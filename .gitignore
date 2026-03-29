@@ -200,3 +200,15 @@ dist
 
 ### Astro ###
 .astro/
+
+## Python Scripts ###
+.venv/
+__pycache__/
+*.pyc
+*.py
+
+### VsCode ###
+.vscode/
+
+### Raw Photos ###
+raw_photos/
