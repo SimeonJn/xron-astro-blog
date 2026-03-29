@@ -16,6 +16,7 @@ const blog = defineCollection({
 		heroImage: z.string().nullable().optional(),
 		cover: z.string().nullable().optional(),
 		references: z.array(z.string()).optional(),
+		tags: z.array(z.string()).optional(),
 	}).transform((data) => ({
 		...data,
 		pubDate: data.pubDate || data.date || new Date(),

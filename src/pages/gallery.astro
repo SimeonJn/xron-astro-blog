@@ -14,6 +14,30 @@ const formattedImages = galleryImages.map((img) => {
         fullResSrc: img.src // Or map to COS URL
     };
 });
+
+function getClockIcon(dateString) {
+    if (!dateString) return '🕛';
+    
+    // 如果字符串包含时间信息 (如包含 ":")，则尝试解析
+    let hours = 0; // 默认12点
+    if (dateString.includes(':') || dateString.includes('T')) {
+        const date = new Date(dateString);
+        if (!isNaN(date.getTime())) {
+            hours = date.getHours() % 12;
+        }
+    } else {
+        // 如果只有日期，为了增加趣味性，可以用日期的字符串哈希给一个固定的表盘
+        // 或者简单默认返回 🕛。这里用简单的哈希让它看起来有变化
+        let hash = 0;
+        for (let i = 0; i < dateString.length; i++) {
+            hash = dateString.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        hours = Math.abs(hash) % 12;
+    }
+
+    const clockIcons = ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'];
+    return clockIcons[hours];
+}
 ---
 
 <!doctype html>
@@ -330,8 +354,8 @@ const formattedImages = galleryImages.map((img) => {
 								{image.alt && <div class="caption-title">{image.alt}</div>}
 								{image.description && <div class="caption-desc" style="font-size: 0.85em; color: #888; margin-top: 0.3em; line-height: 1.2;">{image.description}</div>}
 								{(image.date || image.location) && (
-									<div class="caption-meta" style="font-size: 0.75em; color: #aaa; margin-top: 0.8em; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 6px;">
-										{image.date && <span class="date">{image.date}</span>}
+									<div class="caption-meta" style="font-size: 0.75em; color: #aaa; margin-top: 0.8em; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; border-top: 1px solid #f0f0f0; padding-top: 6px;">
+										{image.date && <span class="date">{getClockIcon(image.date)} {image.date}</span>}
 										{image.location && <span class="location">📍 {image.location}</span>}
 									</div>
 								)}

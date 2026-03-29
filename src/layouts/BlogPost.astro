@@ -10,7 +10,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	headings?: MarkdownHeading[];
 };
 
-const { title, description, pubDate, updatedDate, heroImage, headings = [], references = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, headings = [], references = [], tags = [] } = Astro.props;
 
 // 解析 Markdown 格式的参考文献链接 (例如: '[text](url)')
 const parsedReferences = references.map((ref) => {
@@ -63,6 +63,7 @@ const parsedReferences = references.map((ref) => {
 				color: var(--text-muted);
 				font-size: 0.9em;
 				display: flex;
+				flex-wrap: wrap;
 				gap: 1em;
 				align-items: center;
 			}
@@ -76,6 +77,25 @@ const parsedReferences = references.map((ref) => {
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			.tags-container {
+				display: flex;
+				align-items: center;
+				gap: 0.8em;
+			}
+			.tags-container::before {
+				content: '|';
+				color: var(--text-muted);
+				opacity: 0.5;
+			}
+			.tag-item {
+				color: var(--text-main);
+				text-decoration: none;
+				border-bottom: 1px dotted var(--text-muted);
+				transition: border-bottom-color 0.3s ease, color 0.3s ease;
+			}
+			.tag-item:hover {
+				border-bottom-color: var(--text-main);
 			}
 			.content-divider {
 				width: 100%;
@@ -234,6 +254,15 @@ const parsedReferences = references.map((ref) => {
 									updatedDate && (
 										<div class="last-updated-on">
 											(Updated: <FormattedDate date={updatedDate} />)
+										</div>
+									)
+								}
+								{
+									tags && tags.length > 0 && (
+										<div class="tags-container">
+											{tags.map((tag) => (
+												<a href={`/blog?tag=${tag}`} class="tag-item">#{tag}</a>
+											))}
 										</div>
 									)
 								}

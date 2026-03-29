@@ -69,7 +69,12 @@ async function processPhotos() {
       if (rawDate) {
         const d = new Date(rawDate);
         if (!isNaN(d.getTime())) {
-          autoDate = d.toISOString().split('T')[0]; // 提取 YYYY-MM-DD
+          const year = d.getFullYear();
+          const month = String(d.getMonth() + 1).padStart(2, '0');
+          const day = String(d.getDate()).padStart(2, '0');
+          const hours = String(d.getHours()).padStart(2, '0');
+          const minutes = String(d.getMinutes()).padStart(2, '0');
+          autoDate = `${year}-${month}-${day} ${hours}:${minutes}`; // 提取 YYYY-MM-DD HH:mm 以便展示时钟图标
         }
       }
 
@@ -82,7 +87,7 @@ async function processPhotos() {
     }
 
     // 优化：采用 "日期-哈希" 结构生成文件，极其干净 (如 20240128-a1b2c3d4.webp)
-    const datePrefix = autoDate ? `${autoDate.replace(/-/g, '')}-` : 'nodate-';
+    const datePrefix = autoDate ? `${autoDate.split(' ')[0].replace(/-/g, '')}-` : 'nodate-';
     const hashStr = crypto.createHash('md5').update(file).digest('hex').slice(0, 8);
     const webpName = `${datePrefix}${hashStr}.webp`;
     const outputPath = path.join(OUT_DIR, webpName);
@@ -118,9 +123,9 @@ async function processPhotos() {
       src: `/photos/${webpName}`,
       alt: fileMeta.title || '', // 默认不填充文件名，作为装饰图
       description: fileMeta.description || '',
-      date: fileMeta.date || autoDate || '', // 优先使用手动备注的日期，否则使用 EXIF 提取出的日期
-      location: fileMeta.location || autoLocation || '', // 优先使用手写的地点名，否则记录照片 EXIF 给出的经纬度
-      rawGPS: autoLocation ? true : false // 标记这是否是一个未经转译的经纬度字符串，前端也许可以用来跳转地图
+      date: fileMeta.date !== undefined ? fileMeta.date : (autoDate || ''), // 优先使用手动备注的日期，否则使用 EXIF 提取出的日期
+      location: fileMeta.location !== undefined ? fileMeta.location : (autoLocation || ''), // 优先使用手写的地点名，否则记录照片 EXIF 给出的经纬度
+      rawGPS: fileMeta.location !== undefined ? false : !!autoLocation // 标记这是否是一个未经转译的经纬度字符串，如果手写了地点则不再是 rawGPS
     });
   }
 
