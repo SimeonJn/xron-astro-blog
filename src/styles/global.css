@@ -13,6 +13,16 @@
 	--dot-color-dark: rgba(0, 0, 0, 0.2);
 }
 
+:root.dark {
+	--bg-color: #111111;
+	--text-main: #fafafa;
+	--text-muted: #aaaaaa;
+	--line-color: #333333;
+	--line-color-dark: #e5e5e5;
+	--dot-color: rgba(255, 255, 255, 0.08);
+	--dot-color-dark: rgba(255, 255, 255, 0.2);
+}
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -20,12 +30,44 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+/* Theme Toggle Transition */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *:before,
+html.theme-transition *:after {
+	view-transition-name: none !important;
+}
+html.theme-transition {
+	view-transition-name: root !important;
+}
+html.theme-transition::view-transition-old(root),
+html.theme-transition::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+	display: block;
+}
+html.theme-transition::view-transition-group(root) {
+	animation-duration: 500ms;
+}
+html.theme-transition::view-transition-old(root) {
+	z-index: 1;
+}
+html.theme-transition::view-transition-new(root) {
+	z-index: 2;
+}
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-bold.woff") format("woff");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
+}
+
+html {
+	min-height: 100vh;
+	background-color: var(--bg-color);
 }
 
 body {
@@ -84,7 +126,7 @@ p {
 	color: var(--text-main);
 }
 
-img {
+.hero-image img {
 	max-width: 100%;
 	height: auto;
 	border: 1px solid var(--line-color);
@@ -92,7 +134,7 @@ img {
 	transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-img:hover {
+.hero-image img:hover {
 	filter: grayscale(0%);
 }
 

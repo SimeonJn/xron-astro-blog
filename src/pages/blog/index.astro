@@ -18,7 +18,7 @@ const tags = Array.from(tagsSet).sort();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-hans">
 	<head>
 		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
@@ -185,15 +185,15 @@ const tags = Array.from(tagsSet).sort();
 		</main>
 		<Footer />
 		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				const params = new URLSearchParams(window.location.search);
-				const selectedTag = params.get('tag');
+			function initBlogFilter() {
 				const items = document.querySelectorAll('.post-item');
 				const filterLinks = document.querySelectorAll('.tag-filter-item');
 
+				if (!items.length || !filterLinks.length) return; // Not on the blog page or missing items
+
 				function filterPosts(tag) {
 					filterLinks.forEach(link => {
-						if (link.getAttribute('data-tag') === tag || (tag === null && link.getAttribute('data-tag') === 'all')) {
+						if (link.getAttribute('data-tag') === tag || ((!tag || tag === 'all') && link.getAttribute('data-tag') === 'all')) {
 							link.classList.add('active');
 						} else {
 							link.classList.remove('active');
@@ -203,35 +203,45 @@ const tags = Array.from(tagsSet).sort();
 					items.forEach(item => {
 						const tags = item.getAttribute('data-tags') || '';
 						if (!tag || tag === 'all') {
+							// @ts-ignore
 							item.style.display = '';
 						} else {
 							const tagsArray = tags.split(',');
 							if (tagsArray.includes(tag)) {
+								// @ts-ignore
 								item.style.display = '';
 							} else {
+								// @ts-ignore
 								item.style.display = 'none';
 							}
 						}
 					});
 				}
 
-				filterPosts(selectedTag);
+				// Run initial filter based on URL
+				const params = new URLSearchParams(window.location.search);
+				filterPosts(params.get('tag'));
 				
 				// Optional: Client-side navigation without reload
 				filterLinks.forEach(link => {
-					link.addEventListener('click', (e) => {
+					// @ts-ignore
+					link.onclick = (e) => {
 						e.preventDefault();
 						const tag = link.getAttribute('data-tag');
-						const newUrl = tag === 'all' ? '/blog' : `/blog?tag=${tag}`;
+						const newUrl = (tag === 'all' || !tag) ? '/blog' : `/blog?tag=${tag}`;
 						window.history.pushState({path: newUrl}, '', newUrl);
 						filterPosts(tag);
-					});
+					};
 				});
-				
-				window.addEventListener('popstate', () => {
-					const params = new URLSearchParams(window.location.search);
-					filterPosts(params.get('tag'));
-				});
+			}
+
+			// Run on initial load and view transition page loads
+			document.addEventListener('DOMContentLoaded', initBlogFilter);
+			document.addEventListener('astro:page-load', initBlogFilter);
+
+			// Handle browser back/forward buttons seamlessly
+			window.addEventListener('popstate', () => {
+				initBlogFilter();
 			});
 		</script>
 	</body>
