@@ -136,6 +136,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20220827-5b61c31b.webp",
+    "alt": "",
+    "description": "",
+    "date": "2022-08-27 10:13",
+    "location": "",
+    "rawGPS": false
+  },
+  {
     "src": "/photos/20241220-c70d349a.webp",
     "alt": "",
     "description": "",
@@ -272,6 +280,22 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20210222-3deb68b4.webp",
+    "alt": "",
+    "description": "",
+    "date": "2021-02-22 10:24",
+    "location": "23.5217, 116.7212",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20230218-90342b92.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-02-18 19:09",
+    "location": "39.9137, 116.3966",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20230613-1495e6a5.webp",
     "alt": "",
     "description": "",
@@ -320,11 +344,83 @@
     "rawGPS": false
   },
   {
+    "src": "/photos/20250408-893b5ba8.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-04-08 14:57",
+    "location": "52.9365, -1.1955",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250408-7ff2aace.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-04-08 15:19",
+    "location": "52.9379, -1.1914",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250416-58a5ced7.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-04-16 16:36",
+    "location": "52.9601, -1.1788",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250425-3d2e89e2.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-04-25 17:05",
+    "location": "52.9486, -1.2099",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250512-e3f24a1e.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-05-12 12:51",
+    "location": "53.0530, -1.4522",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250519-b52fcfb6.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-05-19 19:00",
+    "location": "52.9492, -1.1812",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250523-19d229db.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-05-23 16:55",
+    "location": "53.2067, -1.6068",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20250614-56bf7e82.webp",
     "alt": "",
     "description": "",
     "date": "2025-06-14 15:01",
     "location": "51.5204, -0.1271",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250615-77c45529.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-06-15 12:54",
+    "location": "51.4815, -0.0037",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250615-087584f9.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-06-15 15:46",
+    "location": "51.5101, -0.0817",
     "rawGPS": true
   },
   {
@@ -588,6 +684,14 @@
     "alt": "Hello Word Keyboard",
     "description": "peng-zhihui/HelloWord-Keyboard",
     "date": "2023-02-05",
+    "location": "",
+    "rawGPS": false
+  },
+  {
+    "src": "/photos/nodate-90dd8d63.webp",
+    "alt": "",
+    "description": "",
+    "date": "",
     "location": "",
     "rawGPS": false
   }
