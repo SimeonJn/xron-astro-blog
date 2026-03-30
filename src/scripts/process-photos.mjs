@@ -14,16 +14,10 @@ const META_FILE = path.join(RAW_DIR, 'meta.json');
 async function processPhotos() {
   console.log('开始处理图片...');
   
-  // 确保目录存在，并清空旧的相册输出目录避免改名后留下大量没用的孤儿文件
+  // 确保目录存在
   await fs.mkdir(RAW_DIR, { recursive: true });
   await fs.mkdir(OUT_DIR, { recursive: true });
   await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-  
-  // 清理目录内文件
-  const oldFiles = await fs.readdir(OUT_DIR);
-  for (const f of oldFiles) {
-    if (f.endsWith('.webp')) await fs.unlink(path.join(OUT_DIR, f));
-  }
 
   // 读取原图目录
   const files = await fs.readdir(RAW_DIR);
@@ -92,30 +86,60 @@ async function processPhotos() {
     const webpName = `${datePrefix}${hashStr}.webp`;
     const outputPath = path.join(OUT_DIR, webpName);
 
-    console.log(`正在压缩: ${file} -> ${webpName}`);
+    // console.log(`正在压缩: ${file} -> ${webpName}`);
     
-    try {
-      if (ext.toLowerCase() === '.heic') {
-        const buffer = await fs.readFile(inputPath);
-        const { width, height, data } = await heicDecode({ buffer });
+    // try {
+    //   if (ext.toLowerCase() === '.heic') {
+    //     const buffer = await fs.readFile(inputPath);
+    //     const { width, height, data } = await heicDecode({ buffer });
         
-        await sharp(Buffer.from(data), {
-          raw: { width, height, channels: 4 }
-        })
-          .resize({ width: 1200, withoutEnlargement: true })
-          .webp({ quality: 80 })
-          .toFile(outputPath);
-      } else {
-        // 使用 sharp 压缩其他图片：最大宽度 1200，转换为 80% 质量的 webp
-        await sharp(inputPath)
-          .resize({ width: 1200, withoutEnlargement: true })
-          .webp({ quality: 80 })
-          .toFile(outputPath);
+    //     await sharp(Buffer.from(data), {
+    //       raw: { width, height, channels: 4 }
+    //     })
+    //       .resize({ width: 1200, withoutEnlargement: true })
+    //       .webp({ quality: 80 })
+    //       .toFile(outputPath);
+    //   } else {
+    //     // 使用 sharp 压缩其他图片：最大宽度 1200，转换为 80% 质量的 webp
+    //     await sharp(inputPath)
+    //       .resize({ width: 1200, withoutEnlargement: true })
+    //       .webp({ quality: 80 })
+    //       .toFile(outputPath);
+    //   }
+    // } catch (err) {
+    //   console.error(`❌ 处理图片 ${file} 失败:`, err.message);
+    //   continue;
+    // }
+
+    if (fsSync.existsSync(outputPath)) {
+      console.log(`跳过已存在文件: ${webpName}`);
+    } else {
+      console.log(`正在压缩: ${file} -> ${webpName}`);
+
+      try {
+        if (ext.toLowerCase() === '.heic') {
+          const buffer = await fs.readFile(inputPath);
+          const { width, height, data } = await heicDecode({ buffer });
+
+          await sharp(Buffer.from(data), {
+            raw: { width, height, channels: 4 }
+          })
+            .resize({ width: 1200, withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toFile(outputPath);
+        } else {
+          // 使用 sharp 压缩其他图片：最大宽度 1200，转换为 80% 质量的 webp
+          await sharp(inputPath)
+            .resize({ width: 1200, withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toFile(outputPath);
+        }
+      } catch (err) {
+        console.error(`❌ 处理图片 ${file} 失败:`, err.message);
+        continue;
       }
-    } catch (err) {
-      console.error(`❌ 处理图片 ${file} 失败:`, err.message);
-      continue;
     }
+
 
     // 获取对应的备注信息（如果没有，则默认标题留空，不显示冗长的文件名）
     const fileMeta = meta[file] || {};

@@ -1,5 +1,13 @@
 [
   {
+    "src": "/photos/nodate-6b9ec728.webp",
+    "alt": "Wilmot Works It Out",
+    "description": "",
+    "date": "2025-09-24",
+    "location": "",
+    "rawGPS": false
+  },
+  {
     "src": "/photos/20240128-c8c43f8d.webp",
     "alt": "",
     "description": "",
@@ -312,6 +320,30 @@
     "rawGPS": false
   },
   {
+    "src": "/photos/20250614-56bf7e82.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-06-14 15:01",
+    "location": "51.5204, -0.1271",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250615-aad291d8.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-06-15 17:38",
+    "location": "51.5320, -0.1241",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250707-4b09c189.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-07-07 15:20",
+    "location": "56.1276, -3.9378",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20250709-d79a0162.webp",
     "alt": "",
     "description": "",
@@ -344,6 +376,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20250710-ac6833fa.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-07-10 13:55",
+    "location": "56.6985, -3.7228",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20250710-9a599aaf.webp",
     "alt": "",
     "description": "",
@@ -368,11 +408,83 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20250711-7d729ff9.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-07-11 15:11",
+    "location": "55.9495, -3.1920",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20250711-14ca7142.webp",
     "alt": "",
     "description": "",
     "date": "2025-07-11 19:11",
     "location": "55.9440, -3.1621",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250812-30ca0b47.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-08-12 16:43",
+    "location": "53.4750, -2.2258",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250816-e3abce3b.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-08-16 13:11",
+    "location": "51.5058, -0.0757",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250817-99ea1ffd.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-08-17 12:19",
+    "location": "54.3432, -2.7746",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250817-f073819a.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-08-17 15:59",
+    "location": "54.4435, -2.9966",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250825-892c1419.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-08-25 22:37",
+    "location": "52.9492, -1.1814",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250909-6e09501c.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-09-09 11:26",
+    "location": "31.1486, 121.6555",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250909-9510d6dd.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-09-09 11:27",
+    "location": "31.1486, 121.6554",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250909-95f6c90f.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-09-09 12:09",
+    "location": "31.1478, 121.6577",
     "rawGPS": true
   },
   {
@@ -448,6 +560,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20260327-2dd0b7b6.webp",
+    "alt": "",
+    "description": "",
+    "date": "2026-03-27 19:23",
+    "location": "31.3053, 120.6482",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20250709-a9e608af.webp",
     "alt": "",
     "description": "",
@@ -466,7 +586,7 @@
   {
     "src": "/photos/20230205-2c3afc5b.webp",
     "alt": "Hello Word Keyboard",
-    "description": "Description for Hello Word Keyboard",
+    "description": "peng-zhihui/HelloWord-Keyboard",
     "date": "2023-02-05",
     "location": "",
     "rawGPS": false
