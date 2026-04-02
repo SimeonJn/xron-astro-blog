@@ -216,12 +216,15 @@ function formatDateDisplay(dateString) {
 				max-height: 90vh;
 				/* 给高清原图也套一层干净的白底拍立得质感 */
 				background: #fff;
-				padding: 20px 20px 60px 20px; /* 底部留白写描述 */
+				padding: 15px; /* 内部给点留白 */
 				box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-				border-radius: 4px;
+				border: 1px solid var(--line-color, #ebebeb);
 				opacity: 0;
 				transform: scale(0.9) translateY(20px);
 				transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 			}
 
 			.lightbox-content.img-loaded {
@@ -232,19 +235,111 @@ function formatDateDisplay(dateString) {
 			.lightbox-content img {
 				display: block;
 				max-width: 100%;
-				max-height: calc(90vh - 100px); /* 减去 paading 空间 */
+				max-height: calc(85vh - 120px); /* 留足下面文字的高度 */
 				object-fit: contain;
+				border: 1px solid #f4f4f4;
 			}
 
-			.lightbox-caption {
-				position: absolute;
-				bottom: 20px;
-				left: 0;
-				right: 0;
-				text-align: center;
+			.lightbox-info {
+				width: 100%;
+				margin-top: 15px;
+				padding-top: 15px;
+				border-top: 1px dashed #ccc;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 				color: #333;
-				font-size: 1.2em;
+				text-align: center;
+			}
+			
+			.lightbox-info .title {
+				font-size: 1.25em;
+				font-weight: 500;
+				letter-spacing: 2px;
+				opacity: 0;
+				transform: translateY(10px);
+				transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+			}
+			
+			.lightbox-info .desc {
+				font-size: 0.9em;
+				color: #666;
+				margin-top: 6px;
 				letter-spacing: 1px;
+				opacity: 0;
+				transform: translateY(10px);
+				transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
+			}
+
+			.lightbox-info .meta {
+				font-size: 0.8em;
+				color: #999;
+				margin-top: 8px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				letter-spacing: 1.5px;
+				opacity: 0;
+				transform: translateY(10px);
+				transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s;
+			}
+			
+			.lightbox-info .meta .dot {
+				width: 4px;
+				height: 4px;
+				background-color: #ccc;
+				border-radius: 50%;
+			}
+
+			.lightbox-content.img-loaded .lightbox-info .title,
+			.lightbox-content.img-loaded .lightbox-info .desc,
+			.lightbox-content.img-loaded .lightbox-info .meta {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* 切换状态，保持尺寸但有微反响 */
+			.lightbox-content.img-loaded.switching {
+				opacity: 0.6;
+				transform: scale(0.98);
+				transition: opacity 0.2s ease, transform 0.2s ease;
+			}
+
+			.lightbox-nav {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				color: white;
+				font-size: 3em;
+				cursor: pointer;
+				z-index: 1001;
+				user-select: none;
+				padding: 20px;
+				transition: transform 0.3s, opacity 0.3s;
+				opacity: 0.7;
+				font-family: monospace;
+			}
+
+			.lightbox-nav:hover {
+				transform: translateY(-50%) scale(1.2);
+				opacity: 1;
+			}
+
+			.lightbox-nav.prev {
+				left: 20px;
+			}
+
+			.lightbox-nav.next {
+				right: 20px;
+			}
+
+			@media (max-width: 720px) {
+				.lightbox-nav {
+					font-size: 2em;
+					padding: 10px;
+				}
+				.lightbox-nav.prev { left: 5px; }
+				.lightbox-nav.next { right: 5px; }
 			}
 		</style>
 	</head>
@@ -254,17 +349,33 @@ function formatDateDisplay(dateString) {
 			<!-- 弹出的灯箱 -->
 			<div id="gallery-lightbox" class="lightbox">
 				<div class="lightbox-close" id="lightbox-close">&times;</div>
+				<div class="lightbox-nav prev" id="lightbox-prev">&lt;</div>
+				<div class="lightbox-nav next" id="lightbox-next">&gt;</div>
 				<div class="lightbox-loader" id="lightbox-loader">LOADING HD...</div>
 				<div class="lightbox-content" id="lightbox-content">
 					<img id="lightbox-img" src="" alt="High Resolution Photo" />
-					<div class="lightbox-caption" id="lightbox-caption"></div>
+					<div class="lightbox-info">
+						<div class="title" id="lightbox-title"></div>
+						<div class="desc" id="lightbox-desc"></div>
+						<div class="meta" id="lightbox-meta">
+							<span id="lightbox-date"></span>
+							<div class="dot" id="lightbox-meta-dot"></div>
+							<span id="lightbox-location"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<div class="gallery-container">
 				{formattedImages.map((image) => (
 					<!-- 在这里绑定 data-full-src 用于后续 JS 截取原图链接 -->
-					<div class="polaroid-item scroll-animate" data-full-src={image.fullResSrc} data-alt={image.alt}>
+					<div class="polaroid-item scroll-animate" 
+                        data-full-src={image.fullResSrc} 
+                        data-alt={image.alt || ''}
+                        data-desc={image.description || ''}
+                        data-date={image.date ? `${getClockIcon(image.date)} ${formatDateDisplay(image.date)}` : ''}
+                        data-location={image.location || ''}
+                    >
 						<!-- Loading Placeholder -->
 						<div class="dashed-frame"></div>
 						
@@ -308,41 +419,117 @@ function formatDateDisplay(dateString) {
 				const polaroids = document.querySelectorAll('.polaroid-item');
 				const lightbox = document.getElementById('gallery-lightbox');
 				const lightboxImg = document.getElementById('lightbox-img');
-				const lightboxCaption = document.getElementById('lightbox-caption');
+				const lightboxTitle = document.getElementById('lightbox-title');
+				const lightboxDesc = document.getElementById('lightbox-desc');
+				const lightboxDate = document.getElementById('lightbox-date');
+				const lightboxLocation = document.getElementById('lightbox-location');
+				const lightboxMetaDot = document.getElementById('lightbox-meta-dot');
 				const lightboxContent = document.getElementById('lightbox-content');
 				const btnClose = document.getElementById('lightbox-close');
+				const btnPrev = document.getElementById('lightbox-prev');
+				const btnNext = document.getElementById('lightbox-next');
+
+				let currentIndex = -1;
+				const imagesData = Array.from(polaroids).map((p, idx) => {
+					// 绑定索引以便点击时知道当前是哪一张
+					p.setAttribute('data-index', idx.toString());
+					return {
+						fullSrc: p.getAttribute('data-full-src'),
+						alt: p.getAttribute('data-alt'),
+						desc: p.getAttribute('data-desc'),
+						date: p.getAttribute('data-date'),
+						location: p.getAttribute('data-location')
+					};
+				});
+
+				let currentLoadToken = null;
+
+				const openLightboxImage = (index) => {
+					if (index < 0 || index >= imagesData.length) return;
+					if (!lightbox || !lightboxImg || !lightboxContent) return;
+
+					currentIndex = index;
+					const data = imagesData[index];
+					const isOpen = lightbox.classList.contains('open');
+
+					// 防止连续点击导致加载乱序
+					const token = Symbol();
+					currentLoadToken = token;
+
+					if (!isOpen) {
+						// 第一次打开，重置状态并收起动画
+						lightboxContent.classList.remove('img-loaded', 'switching');
+						// @ts-ignore
+						lightboxImg.src = '';
+						// 显示背景及 LOADING
+						lightbox.classList.add('open');
+					} else {
+						// 已在灯箱中切换，保留容器尺寸只做微调动画
+						lightboxContent.classList.add('switching');
+					}
+					
+					const applyImage = () => {
+						if (currentLoadToken !== token) return;
+
+						// @ts-ignore
+						lightboxImg.src = data.fullSrc || '';
+						// @ts-ignore
+						lightboxImg.alt = data.alt || '';
+						
+						// 填充信息
+						if (lightboxTitle) lightboxTitle.textContent = data.alt || '';
+						if (lightboxDesc) {
+							lightboxDesc.textContent = data.desc || '';
+							lightboxDesc.style.display = data.desc ? 'block' : 'none';
+						}
+						if (lightboxDate) {
+							lightboxDate.textContent = data.date || '';
+							lightboxDate.style.display = data.date ? 'inline' : 'none';
+						}
+						if (lightboxLocation) {
+							lightboxLocation.textContent = data.location ? `📍 ${data.location}` : '';
+							lightboxLocation.style.display = data.location ? 'inline' : 'none';
+						}
+						if (lightboxMetaDot) {
+							lightboxMetaDot.style.display = (data.date && data.location) ? 'block' : 'none';
+						}
+
+						// 图片加载好后弹出或者恢复拍立得相框状态
+						lightboxContent.classList.add('img-loaded');
+						lightboxContent.classList.remove('switching');
+					};
+
+					// 预加载原图
+					if (data.fullSrc) {
+						const tempImg = new Image();
+						tempImg.onload = applyImage;
+						tempImg.onerror = applyImage; // 防止图片损坏或缺失时一直卡 Loading
+						// @ts-ignore
+						tempImg.src = data.fullSrc; 
+					} else {
+						applyImage();
+					}
+				};
 
 				polaroids.forEach(p => {
 					p.addEventListener('click', () => {
-						const fullSrc = p.getAttribute('data-full-src');
-						const altText = p.getAttribute('data-alt');
-						
-						if (!lightbox || !lightboxImg || !lightboxContent) return;
-
-						// 重置状态
-						lightboxContent.classList.remove('img-loaded');
-						// @ts-ignore
-						lightboxImg.src = '';
-						
-						// 开启灯箱（这时候背景变暗，只显示 LOADING 文字）
-						lightbox.classList.add('open');
-						
-						// 预加载原图
-						const tempImg = new Image();
-						tempImg.onload = () => {
-							// @ts-ignore
-							lightboxImg.src = fullSrc;
-							// @ts-ignore
-							lightboxImg.alt = altText;
-							// @ts-ignore
-							if (lightboxCaption) lightboxCaption.textContent = altText;
-							// 图片加载好后弹出拍立得相框
-							lightboxContent.classList.add('img-loaded');
-						};
-						// @ts-ignore
-						tempImg.src = fullSrc; 
+						const index = parseInt(p.getAttribute('data-index') || '0', 10);
+						openLightboxImage(index);
 					});
 				});
+
+				const nextImage = (e) => {
+					if (e) e.stopPropagation();
+					openLightboxImage((currentIndex + 1) % imagesData.length);
+				};
+
+				const prevImage = (e) => {
+					if (e) e.stopPropagation();
+					openLightboxImage((currentIndex - 1 + imagesData.length) % imagesData.length);
+				};
+
+				btnNext?.addEventListener('click', nextImage);
+				btnPrev?.addEventListener('click', prevImage);
 
 				// 关闭事件
 				const closeLightbox = () => {
@@ -355,19 +542,36 @@ function formatDateDisplay(dateString) {
 					}, 400);
 				};
 
-				btnClose?.addEventListener('click', closeLightbox);
+				btnClose?.addEventListener('click', (e) => {
+					if (e) e.stopPropagation();
+					closeLightbox();
+				});
+				
 				// 点击背景也可以关闭
 				lightbox?.addEventListener('click', (e) => {
+					// 只有当点击目标确实是 lightbox 本身时才关闭，而不是内部元素
 					if (e.target === lightbox) {
 						closeLightbox();
 					}
 				});
-				// ESC 键关闭
-				document.addEventListener('keydown', (e) => {
-					if (e.key === 'Escape' && lightbox?.classList.contains('open')) {
+				
+				// 键盘事件
+				// @ts-ignore
+				document.removeEventListener('keydown', window.galleryKeydownHandler);
+				// @ts-ignore
+				window.galleryKeydownHandler = (e) => {
+					if (!lightbox?.classList.contains('open')) return;
+					
+					if (e.key === 'Escape') {
 						closeLightbox();
+					} else if (e.key === 'ArrowRight') {
+						nextImage();
+					} else if (e.key === 'ArrowLeft') {
+						prevImage();
 					}
-				});
+				};
+				// @ts-ignore
+				document.addEventListener('keydown', window.galleryKeydownHandler);
 			};
 
 			document.addEventListener('DOMContentLoaded', initGallery);
