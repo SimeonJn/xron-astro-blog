@@ -200,6 +200,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20241219-07a20ddc.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-12-19 10:51",
+    "location": "36.8841, 30.7035",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20241220-9f21f1ee.webp",
     "alt": "",
     "description": "",
@@ -232,6 +240,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20241221-48f4645c.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-12-21 21:26",
+    "location": "36.1999, 29.6374",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20241222-6517f9e4.webp",
     "alt": "",
     "description": "",
@@ -253,6 +269,38 @@
     "description": "",
     "date": "2024-12-22 12:32",
     "location": "36.2301, 29.9455",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20241223-0e69a16a.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-12-23 10:23",
+    "location": "38.3025, 34.3204",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20241223-14f50553.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-12-23 15:19",
+    "location": "38.6424, 34.8284",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20241224-24cf0bf0.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-12-24 17:56",
+    "location": "51.5008, -0.1263",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20241224-d2aae967.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-12-24 17:58",
+    "location": "51.5009, -0.1248",
     "rawGPS": true
   },
   {
@@ -293,6 +341,14 @@
     "description": "",
     "date": "2025-03-30 17:29",
     "location": "48.8600, 2.3276",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250403-04829024.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-04-03 15:12",
+    "location": "43.5547, 7.1422",
     "rawGPS": true
   },
   {
@@ -560,11 +616,35 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20250709-48df7ee6.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-07-09 14:30",
+    "location": "57.2734, -5.5133",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250709-41cb0d1a.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-07-09 14:31",
+    "location": "57.2734, -5.5133",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20250709-d79a0162.webp",
     "alt": "",
     "description": "",
     "date": "2025-07-09 14:34",
     "location": "57.2737, -5.5134",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20250709-25db5779.webp",
+    "alt": "",
+    "description": "",
+    "date": "2025-07-09 16:55",
+    "location": "57.4796, -6.1811",
     "rawGPS": true
   },
   {
