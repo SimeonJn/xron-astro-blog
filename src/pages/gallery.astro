@@ -61,30 +61,6 @@ function formatDateDisplay(dateString) {
 				min-height: 100vh;
 			}
 
-			.gallery-header {
-				text-align: center;
-				margin-bottom: 5em;
-				padding: 0 2em;
-				position: relative;
-				z-index: 10;
-			}
-
-			.gallery-heading {
-				font-size: 3.5em;
-				display: inline-block;
-				border-bottom: 2px dashed var(--line-color-dark);
-				padding-bottom: 0.2em;
-				margin-bottom: 0.5em;
-				letter-spacing: 2px;
-				font-weight: 700;
-			}
-
-			.gallery-desc {
-				color: var(--text-muted);
-				font-size: 1.1em;
-				letter-spacing: 1px;
-			}
-
 			/* Scattered Grid Layout */
 			.gallery-container {
 				/* 定义缩放相关的 CSS 变量 */
@@ -426,11 +402,6 @@ function formatDateDisplay(dateString) {
 	<body>
 		<Header />
 		<main>
-			<div class="gallery-header">
-				<h1 class="gallery-heading">Gallery</h1>
-				<p class="gallery-desc">A collection of moments.</p>
-			</div>
-
 			<!-- 缩放控制滑块 -->
 			<div class="zoom-controls-wrapper">
 				<span>-</span>
