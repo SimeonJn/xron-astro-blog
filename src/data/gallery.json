@@ -4,6 +4,30 @@
     "alt": "Wilmot Works It Out",
     "description": "",
     "date": "2025-09-24",
+    "location": "Home",
+    "rawGPS": false
+  },
+  {
+    "src": "/photos/20230902-4b261fe7.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-09-02 10:44",
+    "location": "31.0008, 103.6122",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20230902-103409ce.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-09-02 10:59",
+    "location": "31.0008, 103.6122",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20230915-288c9c84.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-09-15 09:19",
     "location": "",
     "rawGPS": false
   },
@@ -62,14 +86,6 @@
     "date": "2024-10-26 11:36",
     "location": "53.0336, -1.4398",
     "rawGPS": true
-  },
-  {
-    "src": "/photos/nodate-5103655a.webp",
-    "alt": "",
-    "description": "",
-    "date": "",
-    "location": "",
-    "rawGPS": false
   },
   {
     "src": "/photos/20250408-e6450c8d.webp",
@@ -280,6 +296,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20201121-9baf2a33.webp",
+    "alt": "",
+    "description": "",
+    "date": "2020-11-21 20:52",
+    "location": "",
+    "rawGPS": false
+  },
+  {
     "src": "/photos/20210222-3deb68b4.webp",
     "alt": "",
     "description": "",
@@ -288,11 +312,27 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20210319-240910b4.webp",
+    "alt": "",
+    "description": "",
+    "date": "2021-03-19 21:38",
+    "location": "23.0412, 113.3615",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20230218-90342b92.webp",
     "alt": "",
     "description": "",
     "date": "2023-02-18 19:09",
     "location": "39.9137, 116.3966",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20230419-9804d985.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-04-19 20:06",
+    "location": "23.0457, 113.3686",
     "rawGPS": true
   },
   {
@@ -312,6 +352,14 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20230729-862c5995.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-07-29 10:41",
+    "location": "22.1972, 113.5437",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20230812-df0845a6.webp",
     "alt": "",
     "description": "",
@@ -320,11 +368,67 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20230902-54c99b9d.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-09-02 10:36",
+    "location": "30.9986, 103.6137",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20231001-c4ebf3cb.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-10-01 06:05",
+    "location": "23.3224, 116.7759",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20230915-143859d7.webp",
+    "alt": "",
+    "description": "",
+    "date": "2023-09-15 09:19",
+    "location": "",
+    "rawGPS": false
+  },
+  {
+    "src": "/photos/20240125-3c77af30.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-01-25 15:28",
+    "location": "31.2537, 121.5987",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20240127-dedd306f.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-01-27 14:29",
+    "location": "49.7898, 9.9195",
+    "rawGPS": true
+  },
+  {
     "src": "/photos/20240127-750743d3.webp",
     "alt": "",
     "description": "",
     "date": "2024-01-27 15:56",
     "location": "49.7946, 9.9307",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20240128-4cde4e4f.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-01-28 09:01",
+    "location": "49.8007, 9.9354",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20240128-373684c8.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-01-28 11:38",
+    "location": "49.3770, 10.1786",
     "rawGPS": true
   },
   {
@@ -340,6 +444,22 @@
     "alt": "",
     "description": "",
     "date": "2024-02-03 09:07",
+    "location": "",
+    "rawGPS": false
+  },
+  {
+    "src": "/photos/20240204-38bc6368.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-02-04 10:11",
+    "location": "49.5978, 11.0022",
+    "rawGPS": true
+  },
+  {
+    "src": "/photos/20240921-97af50aa.webp",
+    "alt": "",
+    "description": "",
+    "date": "2024-09-21 23:18",
     "location": "",
     "rawGPS": false
   },
@@ -553,11 +673,11 @@
   },
   {
     "src": "/photos/20250825-892c1419.webp",
-    "alt": "",
+    "alt": "C16 全家福",
     "description": "",
     "date": "2025-08-25 22:37",
-    "location": "52.9492, -1.1814",
-    "rawGPS": true
+    "location": "Morriss House",
+    "rawGPS": false
   },
   {
     "src": "/photos/20250909-6e09501c.webp",
@@ -680,11 +800,19 @@
     "rawGPS": true
   },
   {
+    "src": "/photos/20080712-b0b8da2c.webp",
+    "alt": "",
+    "description": "",
+    "date": "2008-07-12 09:09",
+    "location": "",
+    "rawGPS": false
+  },
+  {
     "src": "/photos/20230205-2c3afc5b.webp",
     "alt": "Hello Word Keyboard",
     "description": "peng-zhihui/HelloWord-Keyboard",
     "date": "2023-02-05",
-    "location": "",
+    "location": "Home",
     "rawGPS": false
   },
   {
