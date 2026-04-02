@@ -1,4 +1,5 @@
 ﻿---
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -8,13 +9,29 @@ import '../styles/polaroid.css';
 // Load processed photo data from JSON
 import galleryImages from '../data/gallery.json';
 
+const publicPhotoModules = import.meta.glob('../../public/photos/*.webp', {
+	eager: true,
+	import: 'default',
+});
+
+const publicPhotoAssetsByName = new Map(
+	Object.entries(publicPhotoModules).map(([filePath, asset]) => {
+		const fileName = filePath.split('/').pop() ?? '';
+		return [fileName, asset];
+	})
+);
+
 const formattedImages = galleryImages.map((img) => {
+	const fileName = img.src.split('/').pop() ?? '';
     return {
         ...img,
         // Optional: construct full res link if you ever upload originals to COS
-        fullResSrc: img.src // Or map to COS URL
+		fullResSrc: img.src, // Or map to COS URL
+		thumbnailAsset: publicPhotoAssetsByName.get(fileName),
     };
 });
+
+const fallbackLightboxAsset = formattedImages.find((image) => image.thumbnailAsset)?.thumbnailAsset;
 
 function getClockIcon(dateString) {
     if (!dateString) return '🕛';
@@ -61,40 +78,82 @@ function formatDateDisplay(dateString) {
 				min-height: 100vh;
 			}
 
-			.gallery-header {
-				text-align: center;
-				margin-bottom: 5em;
-				padding: 0 2em;
-				position: relative;
-				z-index: 10;
-			}
-
-			.gallery-heading {
-				font-size: 3.5em;
-				display: inline-block;
-				border-bottom: 2px dashed var(--line-color-dark);
-				padding-bottom: 0.2em;
-				margin-bottom: 0.5em;
-				letter-spacing: 2px;
-				font-weight: 700;
-			}
-
-			.gallery-desc {
-				color: var(--text-muted);
-				font-size: 1.1em;
-				letter-spacing: 1px;
-			}
-
 			/* Scattered Grid Layout */
 			.gallery-container {
+				/* 定义缩放相关的 CSS 变量 */
+				--zoom: 1;
+				--polaroid-width-base: 310px;
+				--polaroid-height-base: 380px;
+				--polaroid-img-height-base: 250px;
+				
+				--polaroid-width: calc(var(--polaroid-width-base) * var(--zoom));
+				--polaroid-height: calc(var(--polaroid-height-base) * var(--zoom));
+
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: center;
 				align-items: center;
-				gap: 4em 3em;
+				gap: calc(4em * var(--zoom)) calc(3em * var(--zoom));
 				padding: 2em 4em 8em;
 				max-width: 1600px;
 				margin: 0 auto;
+			}
+
+			/* 覆盖 polaroid.css 以支持缩放 */
+			.gallery-container .polaroid-item {
+				width: var(--polaroid-width) !important;
+				height: var(--polaroid-height) !important;
+			}
+
+			.gallery-container .polaroid-content {
+				font-size: calc(1rem * var(--zoom));
+				padding: calc(15px * var(--zoom)) calc(15px * var(--zoom)) calc(25px * var(--zoom)) calc(15px * var(--zoom)) !important;
+			}
+
+			.gallery-container .polaroid-img-wrapper,
+			.gallery-container .polaroid-content img {
+				height: calc(var(--polaroid-img-height-base) * var(--zoom)) !important;
+			}
+
+			/* Zoom Controls */
+			.zoom-controls-wrapper {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 15px;
+				margin: -2em auto 2em;
+				position: relative;
+				z-index: 10;
+				color: var(--text-muted);
+				font-size: 0.9em;
+				letter-spacing: 1px;
+			}
+
+			.zoom-slider {
+				-webkit-appearance: none;
+				width: 150px;
+				height: 2px;
+				background: var(--line-color-dark, #ccc);
+				outline: none;
+				border-radius: 2px;
+				transition: opacity 0.2s;
+			}
+
+			.zoom-slider::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				appearance: none;
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				background: #555;
+				cursor: pointer;
+				border: 2px solid #fff;
+				box-shadow: 0 0 2px rgba(0,0,0,0.4);
+				transition: transform 0.2s ease;
+			}
+			
+			.zoom-slider::-webkit-slider-thumb:hover {
+				transform: scale(1.3);
 			}
 
 			/* Polaroid Container */
@@ -148,22 +207,36 @@ function formatDateDisplay(dateString) {
 			/* Mobile adjust */
 			@media (max-width: 720px) {
 				.gallery-container {
-					gap: 2em;
+					gap: calc(2em * var(--zoom));
 					padding: 1em 2em;
+					--polaroid-width-base: 320px;
 				}
-				.polaroid-item {
+				
+				.zoom-controls-wrapper {
+					margin: -3em auto 2em;
 					width: 100%;
-					max-width: 320px;
-					height: 380px; /* 移除 height: auto，保持和桌面端一致的高度以撑开下方空间 */
+					padding: 0 2em;
+					box-sizing: border-box;
+				}
+				
+				.zoom-slider {
+					width: 100%;
+					max-width: 250px;
+				}
+
+				.gallery-container .polaroid-item {
+					width: 100% !important;
+					max-width: var(--polaroid-width) !important;
+					height: var(--polaroid-height) !important;
 					/* Reduce scatter angle on mobile to prevent overflow clipping badly */
 					transform: rotate(0) !important; 
-					margin-bottom: 2em;
+					margin-bottom: calc(2em * var(--zoom));
 				}
-				.polaroid-content {
-					padding-bottom: 25px;
+				.gallery-container .polaroid-content {
+					padding-bottom: calc(25px * var(--zoom)) !important;
 				}
-				.polaroid-item:nth-child(odd) { transform: rotate(1.5deg) !important; }
-				.polaroid-item:nth-child(even) { transform: rotate(-1.5deg) !important; }
+				.gallery-container .polaroid-item:nth-child(odd) { transform: rotate(1.5deg) !important; }
+				.gallery-container .polaroid-item:nth-child(even) { transform: rotate(-1.5deg) !important; }
 			}
 
 			/* --- 灯箱 (Lightbox) 样式 --- */
@@ -346,6 +419,13 @@ function formatDateDisplay(dateString) {
 	<body>
 		<Header />
 		<main>
+			<!-- 缩放控制滑块 -->
+			<div class="zoom-controls-wrapper">
+				<span>-</span>
+				<input type="range" class="zoom-slider" id="zoomSlider" min="0.4" max="1.5" step="0.01" value="1" aria-label="Zoom images" />
+				<span>+</span>
+			</div>
+
 			<!-- 弹出的灯箱 -->
 			<div id="gallery-lightbox" class="lightbox">
 				<div class="lightbox-close" id="lightbox-close">&times;</div>
@@ -353,7 +433,11 @@ function formatDateDisplay(dateString) {
 				<div class="lightbox-nav next" id="lightbox-next">&gt;</div>
 				<div class="lightbox-loader" id="lightbox-loader">LOADING HD...</div>
 				<div class="lightbox-content" id="lightbox-content">
-					<img id="lightbox-img" src="" alt="High Resolution Photo" />
+					{fallbackLightboxAsset ? (
+						<Image id="lightbox-img" src={fallbackLightboxAsset} alt="High Resolution Photo" />
+					) : (
+						<img id="lightbox-img" src="" alt="High Resolution Photo" />
+					)}
 					<div class="lightbox-info">
 						<div class="title" id="lightbox-title"></div>
 						<div class="desc" id="lightbox-desc"></div>
@@ -382,12 +466,21 @@ function formatDateDisplay(dateString) {
 						<!-- Polaroid Card -->
 						<div class="polaroid-content">
 							<div class="polaroid-img-wrapper">
-								<img 
-									src={image.src} 
-									alt={image.alt} 
-									loading="lazy" 
-									onload="this.closest('.polaroid-item').classList.add('loaded')" 
-								/>
+								{image.thumbnailAsset ? (
+									<Image 
+										src={image.thumbnailAsset} 
+										alt={image.alt || ''} 
+										loading="lazy" 
+										onload="this.closest('.polaroid-item').classList.add('loaded')" 
+									/>
+								) : (
+									<img 
+										src={image.src} 
+										alt={image.alt} 
+										loading="lazy" 
+										onload="this.closest('.polaroid-item').classList.add('loaded')" 
+									/>
+								)}
 							</div>
 							<div class="polaroid-caption">
 								<div class="caption-row title">{image.alt || ''}</div>
@@ -455,6 +548,8 @@ function formatDateDisplay(dateString) {
 					// 防止连续点击导致加载乱序
 					const token = Symbol();
 					currentLoadToken = token;
+					lightboxImg.removeAttribute('srcset');
+					lightboxImg.removeAttribute('sizes');
 
 					if (!isOpen) {
 						// 第一次打开，重置状态并收起动画
@@ -572,6 +667,26 @@ function formatDateDisplay(dateString) {
 				};
 				// @ts-ignore
 				document.addEventListener('keydown', window.galleryKeydownHandler);
+
+
+				// ===================
+				// 无极缩放 (Zoom) 逻辑
+				// ===================
+				const zoomSlider = document.getElementById('zoomSlider');
+				const galleryContainer = document.querySelector('.gallery-container');
+				
+				if (zoomSlider && galleryContainer) {
+					// @ts-ignore
+					zoomSlider.addEventListener('input', (e) => {
+						// @ts-ignore
+						const zoomValue = e.target.value;
+						// @ts-ignore
+						galleryContainer.style.setProperty('--zoom', zoomValue);
+					});
+					// 初始化恢复默认数值
+					// @ts-ignore
+					galleryContainer.style.setProperty('--zoom', zoomSlider.value);
+				}
 			};
 
 			document.addEventListener('DOMContentLoaded', initGallery);
