@@ -1,5 +1,4 @@
 ﻿---
-import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -9,29 +8,13 @@ import '../styles/polaroid.css';
 // Load processed photo data from JSON
 import galleryImages from '../data/gallery.json';
 
-const publicPhotoModules = import.meta.glob('../../public/photos/*.webp', {
-	eager: true,
-	import: 'default',
-});
-
-const publicPhotoAssetsByName = new Map(
-	Object.entries(publicPhotoModules).map(([filePath, asset]) => {
-		const fileName = filePath.split('/').pop() ?? '';
-		return [fileName, asset];
-	})
-);
-
 const formattedImages = galleryImages.map((img) => {
-	const fileName = img.src.split('/').pop() ?? '';
     return {
         ...img,
         // Optional: construct full res link if you ever upload originals to COS
-		fullResSrc: img.src, // Or map to COS URL
-		thumbnailAsset: publicPhotoAssetsByName.get(fileName),
+        fullResSrc: img.src // Or map to COS URL
     };
 });
-
-const fallbackLightboxAsset = formattedImages.find((image) => image.thumbnailAsset)?.thumbnailAsset;
 
 function getClockIcon(dateString) {
     if (!dateString) return '🕛';
@@ -76,6 +59,30 @@ function formatDateDisplay(dateString) {
 				padding: 4em 0 !important;
 				overflow-x: hidden;
 				min-height: 100vh;
+			}
+
+			.gallery-header {
+				text-align: center;
+				margin-bottom: 5em;
+				padding: 0 2em;
+				position: relative;
+				z-index: 10;
+			}
+
+			.gallery-heading {
+				font-size: 3.5em;
+				display: inline-block;
+				border-bottom: 2px dashed var(--line-color-dark);
+				padding-bottom: 0.2em;
+				margin-bottom: 0.5em;
+				letter-spacing: 2px;
+				font-weight: 700;
+			}
+
+			.gallery-desc {
+				color: var(--text-muted);
+				font-size: 1.1em;
+				letter-spacing: 1px;
 			}
 
 			/* Scattered Grid Layout */
@@ -419,6 +426,11 @@ function formatDateDisplay(dateString) {
 	<body>
 		<Header />
 		<main>
+			<div class="gallery-header">
+				<h1 class="gallery-heading">Gallery</h1>
+				<p class="gallery-desc">A collection of moments.</p>
+			</div>
+
 			<!-- 缩放控制滑块 -->
 			<div class="zoom-controls-wrapper">
 				<span>-</span>
@@ -433,11 +445,7 @@ function formatDateDisplay(dateString) {
 				<div class="lightbox-nav next" id="lightbox-next">&gt;</div>
 				<div class="lightbox-loader" id="lightbox-loader">LOADING HD...</div>
 				<div class="lightbox-content" id="lightbox-content">
-					{fallbackLightboxAsset ? (
-						<Image id="lightbox-img" src={fallbackLightboxAsset} alt="High Resolution Photo" />
-					) : (
-						<img id="lightbox-img" src="" alt="High Resolution Photo" />
-					)}
+					<img id="lightbox-img" src="" alt="High Resolution Photo" />
 					<div class="lightbox-info">
 						<div class="title" id="lightbox-title"></div>
 						<div class="desc" id="lightbox-desc"></div>
@@ -466,21 +474,12 @@ function formatDateDisplay(dateString) {
 						<!-- Polaroid Card -->
 						<div class="polaroid-content">
 							<div class="polaroid-img-wrapper">
-								{image.thumbnailAsset ? (
-									<Image 
-										src={image.thumbnailAsset} 
-										alt={image.alt || ''} 
-										loading="lazy" 
-										onload="this.closest('.polaroid-item').classList.add('loaded')" 
-									/>
-								) : (
-									<img 
-										src={image.src} 
-										alt={image.alt} 
-										loading="lazy" 
-										onload="this.closest('.polaroid-item').classList.add('loaded')" 
-									/>
-								)}
+								<img 
+									src={image.src} 
+									alt={image.alt} 
+									loading="lazy" 
+									onload="this.closest('.polaroid-item').classList.add('loaded')" 
+								/>
 							</div>
 							<div class="polaroid-caption">
 								<div class="caption-row title">{image.alt || ''}</div>
@@ -548,8 +547,6 @@ function formatDateDisplay(dateString) {
 					// 防止连续点击导致加载乱序
 					const token = Symbol();
 					currentLoadToken = token;
-					lightboxImg.removeAttribute('srcset');
-					lightboxImg.removeAttribute('sizes');
 
 					if (!isOpen) {
 						// 第一次打开，重置状态并收起动画
