@@ -8,7 +8,20 @@ import '../styles/polaroid.css';
 // Load processed photo data from JSON
 import galleryImages from '../data/gallery.json';
 
-const formattedImages = galleryImages.map((img) => {
+function parseGalleryDateToTimestamp(dateString) {
+	if (!dateString) return Number.NEGATIVE_INFINITY;
+
+	const normalized = String(dateString).includes('T')
+		? String(dateString)
+		: String(dateString).replace(' ', 'T');
+	const parsed = Date.parse(normalized);
+
+	return Number.isNaN(parsed) ? Number.NEGATIVE_INFINITY : parsed;
+}
+
+const formattedImages = [...galleryImages]
+	.sort((a, b) => parseGalleryDateToTimestamp(b.date) - parseGalleryDateToTimestamp(a.date))
+	.map((img) => {
     return {
         ...img,
         // Optional: construct full res link if you ever upload originals to COS

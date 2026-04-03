@@ -202,6 +202,48 @@ hr {
 	margin: 2em 0;
 }
 
+/* Minimalist Tables */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 2.5em 0;
+	font-size: 0.95em;
+	display: block;
+	overflow-x: auto;
+}
+
+table::-webkit-scrollbar {
+	height: 6px;
+}
+table::-webkit-scrollbar-track {
+	background: transparent;
+	border-top: 1px solid var(--line-color);
+}
+table::-webkit-scrollbar-thumb {
+	background-color: var(--text-main);
+}
+
+th, td {
+	padding: 0.8em 1.2em;
+	border: 1px dotted var(--line-color-dark);
+	text-align: left;
+}
+
+th {
+	font-weight: 700;
+	color: var(--text-main);
+	border-bottom: 2px solid var(--text-main);
+	border-top: 1px solid var(--text-main);
+}
+
+tbody tr {
+	transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+	background-color: var(--dot-color);
+}
+
 /* Base Animations */
 @keyframes fade-slide-up {
 	0% {

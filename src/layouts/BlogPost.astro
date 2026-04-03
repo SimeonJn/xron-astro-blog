@@ -47,6 +47,25 @@ const parsedReferences = references.map((ref) => {
 				margin: auto;
 				padding: 1em;
 				color: var(--text-main);
+				min-width: 0;
+			}
+			.article-content {
+				min-width: 0;
+			}
+			.article-content :global(img),
+			.article-content :global(picture),
+			.article-content :global(video),
+			.article-content :global(canvas),
+			.article-content :global(svg) {
+				max-width: 100%;
+				height: auto;
+			}
+			.article-content :global(figure) {
+				max-width: 100%;
+				margin: 1.5em 0;
+			}
+			.article-content :global(figure > img) {
+				display: block;
 			}
 			.title {
 				margin-bottom: 2em;
