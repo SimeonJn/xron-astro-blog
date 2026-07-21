@@ -318,6 +318,11 @@ tbody tr:hover {
 @media (max-width: 720px) {
 	body {
 		font-size: 16px;
+		/* On mobile, switch to scroll attachment (fixed is buggy on iOS Safari)
+		   and use slightly larger dots for better high-DPI visibility */
+		background-size: 24px 24px;
+		background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+		background-attachment: scroll;
 	}
 	main {
 		padding: 1em;
